@@ -31,8 +31,9 @@ jobs:
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "username@users.noreply.github.com"
-          echo $date >> dates.txt
-          git add dates.txt
+          new_num=$(echo "$(cat num)+1" | bc)
+          echo "$new_num" > num
+          echo "secret_scanning_ab85fc6f8d7638cf1c11da812da308d43_$(printf "%05d" $new_num)" > dates.txt"
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
 
